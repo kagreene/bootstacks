@@ -1,6 +1,6 @@
 import sequelize from '../config/connection.js';
-import { VolunteerFactory } from './volunteer.js';
-import { WorkFactory } from './work.js';
+import { VolunteerFactory } from './User.js';
+import { WorkFactory } from './Game.js';
 
     const Volunteer = VolunteerFactory(sequelize);
     const Work = WorkFactory(sequelize);
