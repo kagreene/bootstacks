@@ -1,11 +1,15 @@
-import sequelize from '../config/connection.js';
-import { VolunteerFactory } from './User.js';
-import { WorkFactory } from './Game.js';
+import { Model, DataTypes } from 'sequelize';
+import sequelize from '../config/connection';
+import User from './User';
+import Game from './Game';
 
-    const Volunteer = VolunteerFactory(sequelize);
-    const Work = WorkFactory(sequelize);
+// Set up associations
+User.hasMany(Game, {
+  foreignKey: 'user_id',
+});
 
-    Volunteer.hasMany(Work, { foreignKey: 'assignedVolunteerId'});
-    Work.belongsTo(Volunteer, { foreignKey: 'assignedVolunteerId', as: 'assignedVolunteer'});
+Game.belongsTo(User, {
+  foreignKey: 'user_id',
+});
 
-export { Volunteer, Work };
+export { User, Game }; 
