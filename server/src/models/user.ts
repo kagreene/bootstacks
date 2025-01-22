@@ -1,68 +1,35 @@
-import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
-import bcrypt from 'bcrypt';
+import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 
-interface UserAttributes {
+interface VolunteerAttributes {
   id: number;
-  username: string;
-  email: string;
-  password: string;
+  volunteerName: string;
 }
 
-interface UserCreationAttributes extends Optional<UserAttributes, 'id'> {}
+interface VolunteerCreationAttributes extends Optional<VolunteerAttributes, 'id'> {}
 
-export class User
-  extends Model<UserAttributes, UserCreationAttributes>
-  implements UserAttributes
-{
+export class Volunteer extends Model<VolunteerAttributes, VolunteerCreationAttributes> implements VolunteerAttributes {
   public id!: number;
-  public username!: string;
-  public email!: string;
-  public password!: string;
-
-  public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
-
-  // Hash the password before saving the user
-  public async setPassword(password: string) {
-    const saltRounds = 10;
-    this.password = await bcrypt.hash(password, saltRounds);
-  }
+  public volunteerName!: string;
 }
 
-export function UserFactory(sequelize: Sequelize): typeof User {
-  User.init(
+export function VolunteerFactory(sequelize: Sequelize): typeof Volunteer {
+  Volunteer.init(
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      username: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      email: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
-      password: {
+      volunteerName: {
         type: DataTypes.STRING,
         allowNull: false,
       },
     },
     {
-      tableName: 'users',
+      tableName: 'volunteer',
       sequelize,
-      hooks: {
-        beforeCreate: async (user: User) => {
-          await user.setPassword(user.password);
-        },
-        beforeUpdate: async (user: User) => {
-          await user.setPassword(user.password);
-        },
-      },
     }
   );
 
-  return User;
+  return Volunteer;
 }
