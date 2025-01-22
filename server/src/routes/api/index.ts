@@ -1,6 +1,6 @@
 import { Router } from 'express';
-import { volunteerRouter } from './volunteer-routes.js';
-import { workRouter } from './work-volunteer.js';
+import { volunteerRouter } from './nflApi.js';
+import { workRouter } from './weatherApi.js';
 
 const router = Router();
 
