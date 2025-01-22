@@ -6,6 +6,9 @@ import User from './User';
 import Game from './Game';
 
 // Set up associations
+
+
+
 User.hasMany(Game, {
   foreignKey: 'user_id',
 });
