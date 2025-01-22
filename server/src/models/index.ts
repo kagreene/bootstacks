@@ -1,3 +1,5 @@
+// This file is used to define the models for the server
+
 import { Model, DataTypes } from 'sequelize';
 import sequelize from '../config/connection';
 import User from './User';
