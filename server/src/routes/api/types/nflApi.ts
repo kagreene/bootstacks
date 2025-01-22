@@ -1,0 +1,1 @@
+// This file is used to define the types for the NFL API routes

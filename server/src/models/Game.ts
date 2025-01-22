@@ -1,3 +1,5 @@
+// This file is used to define the Game model for the server
+
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import { Volunteer } from './User.js';
 

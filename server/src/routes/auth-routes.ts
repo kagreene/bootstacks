@@ -1,5 +1,7 @@
+// This file is used to define the authentication routes for the server
+
 import { Router, type Request, type Response } from 'express';
-import { User } from '../models/user.js';
+import { User } from '../models/User.js';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
 
