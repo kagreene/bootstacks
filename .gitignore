@@ -129,5 +129,21 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
+# Dependencies
+node_modules/
+package-lock.json
 
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+build/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.swp
 .DS_Store
