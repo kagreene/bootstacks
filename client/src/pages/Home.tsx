@@ -1,9 +1,10 @@
-import React from 'react'
-import { Navbar } from '../components/Navbar'
 
-export const Home = () => {
-  
+
+
+export const Home = () => { 
     return (
-    <Navbar />
-  )
+    <section>
+      <button className="btn btn-primary">click</button>
+    </section>
+      )
 }
