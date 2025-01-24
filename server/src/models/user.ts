@@ -1,6 +1,4 @@
-import { DataTypes, type Sequelize, Model, type Optional } from 'sequelize';
-import bcrypt from 'bcrypt';
-=======
+import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 
 interface VolunteerAttributes {
   id: number;
