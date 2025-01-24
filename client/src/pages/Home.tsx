@@ -1,3 +1,4 @@
+
 import { TeamCard } from "../components/TeamCard"
 
 
@@ -26,4 +27,3 @@ export const Home = () => {
       </section>
     </div>
   )
-}
