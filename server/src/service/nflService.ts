@@ -66,7 +66,7 @@ export const getTeamSchedule = async (teamName: string) => {
             }
         );
         // map response to get schedule of games
-        const data = await response.json();
+        const data = await response.data();
         const events = data.events;
 
         const mappedSchedule = await events.map((event: any) =>{
