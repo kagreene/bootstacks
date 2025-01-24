@@ -1,5 +1,6 @@
 import { TeamCard } from "../components/TeamCard"
 
+
 export const Home = () => { 
     
   return (

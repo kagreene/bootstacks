@@ -10,5 +10,6 @@ export const AppRouter = () => {
           <Route path='/' element={ <Home /> } />        
       </Routes>
     </div>
+
   )
 }
