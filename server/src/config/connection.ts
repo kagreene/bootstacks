@@ -1,3 +1,5 @@
+// This file is used to connect to the database
+
 import dotenv from 'dotenv';
 dotenv.config();
 
