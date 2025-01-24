@@ -102,13 +102,18 @@ export const getTeamSchedule = async (teamName: string) => {
 export const getGameDetails = async (teamName: string, gameID: string) => {
     try {
         const schedule = await getTeamSchedule(teamName);
-        //get game IDs and venues from schedule
-        const gameDetails = schedule.map((game:any) => ({
-            gameID: game.id,
-            venue: game.venue?.fullName,
-            zipCode: game.venue?.adress?.zipCode,
-        }));
-        return gameDetails
+        const game = schedule.find((game: any) => game.gameID === gameID);
+        if (!game) {
+            throw new Error(`Game ${gameID} not found.`);
+        }
+        return {
+            gameID: game.gameID,
+            date: game.date,
+            venue:game.venue,
+            city: game.city,
+            opposingTeam: game.opposingTeam,
+            zipCode: game.zipCode,
+        }
     } catch (error) {
         console.error('Error fetching game details', error);
         throw new Error('Failed to fetch game details.');
