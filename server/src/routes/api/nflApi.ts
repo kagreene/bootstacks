@@ -1,6 +1,6 @@
 import express from 'express';
 import type { Request, Response } from 'express';
-import { Volunteer } from '../../models/index.js';
+import { getTeamSchedule } from '../../service/nflService.js'
 
 const router = express.Router();
 
