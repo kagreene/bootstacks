@@ -1,59 +1,73 @@
 // This file is used to define the Game model for the server
 
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
-import { Volunteer } from './User.js';
 
-interface WorkAttributes {
+interface GameAttributes {
   id: number;
-  name: string;
-  status: string;
-  description: string;
-  assignedVolunteerId?: number;
+  date: Date;
+  homeTeam: string;
+  awayTeam: string;
+  venue: string;
+  weather: string;
+  homeScore: number;
+  awayScore: number;
 }
 
-interface WorkCreationAttributes extends Optional<WorkAttributes, 'id'> {}
+interface GameCreationAttributes extends Optional<GameAttributes, 'id'> {}
 
-export class Work extends Model<WorkAttributes, WorkCreationAttributes> implements WorkAttributes {
+export class Game extends Model<GameAttributes, GameCreationAttributes> implements GameAttributes {
   public id!: number;
-  public name!: string;
-  public status!: string;
-  public description!: string;
-  public assignedVolunteerId!: number;
-
-  // associated Volunteer model
-  public readonly assignedVolunteer?: Volunteer;
+  public date!: Date;
+  public homeTeam!: string;
+  public awayTeam!: string;
+  public venue!: string;
+  public weather!: string;
+  public homeScore!: number;
+  public awayScore!: number;
 }
 
-export function WorkFactory(sequelize: Sequelize): typeof Work {
-  Work.init(
+export function GameFactory(sequelize: Sequelize): typeof Game {
+  Game.init(
     {
       id: {
         type: DataTypes.INTEGER,
         autoIncrement: true,
         primaryKey: true,
       },
-      name: {
+      date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      homeTeam: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      status: {
+      awayTeam: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      description: {
+      venue: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      assignedVolunteerId: {
+      weather: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
+      homeScore: {
         type: DataTypes.INTEGER,
-        allowNull: true,
+        allowNull: false,
+      },
+      awayScore: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
       },
     },
     {
-      tableName: 'work',
+      tableName: 'games',
       sequelize,
     }
   );
 
-  return Work;
+  return Game;
 }
