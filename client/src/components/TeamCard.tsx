@@ -1,12 +1,21 @@
 import React from 'react'
 
-export const TeamCard = () => {
+interface TeamCardProps {
+  game:string,
+  location:string,
+  time:string
+}
+
+export const TeamCard = ( { game, location, time } : TeamCardProps ) => {
   return (
-    <div className="card" style={{width: "10%"}}>
+    <div className="card" style={{width: "25%"}}>
       <div className='row'>
         <div className='col-8'>
           <div className="card-body">
-            <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            <h2>EVENT</h2>
+            <p className="card-text">Game: { game.substring(0,game.indexOf("at") ) }  <span>VS</span> {game.substring(game.indexOf("at") + 2, game.length - 1)}</p>
+            <p className="card-text">Location: { location }</p>
+            <p className="card-text">Time: { time }</p>
           </div>
         </div>
         <div>

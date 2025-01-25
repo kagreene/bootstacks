@@ -1,3 +1,4 @@
+import { GamesList } from "../components/GamesList"
 import { TeamCard } from "../components/TeamCard"
 
 
@@ -22,7 +23,7 @@ export const Home = () => {
       </section>
 
       <section>
-        <TeamCard />
+        <GamesList/>
       </section>
     </div>
   )
