@@ -1,5 +1,6 @@
-import { seedVolunteers } from './volunteer-seeds.js';
-import { seedWork } from './work-seeds.js';
+import { seedTeams } from './team-seeds.js';
+import { seedGames } from './game-seeds.js';
+import { seedWeather } from './weather-seeds.js';
 import sequelize from '../config/connection.js';
 
 const seedAll = async (): Promise<void> => {
@@ -7,11 +8,14 @@ const seedAll = async (): Promise<void> => {
     await sequelize.sync({ force: true });
     console.log('\n----- DATABASE SYNCED -----\n');
     
-    await seedVolunteers();
-    console.log('\n----- VOLUNTEERS SEEDED -----\n');
+    await seedTeams();
+    console.log('\n----- TEAMS SEEDED -----\n');
     
-    await seedWork();
-    console.log('\n----- WORK SEEDED -----\n');
+    await seedGames();
+    console.log('\n----- GAMES SEEDED -----\n');
+    
+    await seedWeather();
+    console.log('\n----- WEATHER SEEDED -----\n');
     
     process.exit(0);
   } catch (error) {
