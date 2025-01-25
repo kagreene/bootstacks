@@ -1,5 +1,5 @@
+
 import { GamesList } from "../components/GamesList"
-import { TeamCard } from "../components/TeamCard"
 
 
 export const Home = () => { 

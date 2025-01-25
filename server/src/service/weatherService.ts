@@ -16,3 +16,4 @@ export const getWeatherByCity = async (city: string) => {
     console.error('Error fetching weather', error);
   }
 }
+// need to add functions to fetch weather for specific date 

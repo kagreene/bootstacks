@@ -1,5 +1,4 @@
 
-import { Home } from './pages/Home'
 import { AppRouter } from './routes/AppRouter'
 
 const App = () => {
