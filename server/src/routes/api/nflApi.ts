@@ -1,6 +1,7 @@
 import express from 'express';
 import type { Request, Response } from 'express';
 import { getTeamSchedule, getGameDetails } from '../../service/nflService.js'
+import { Game } from '../../models/index.js';
 
 const router = express.Router();
 
@@ -23,6 +24,9 @@ router.get('/game-details/:teamName/:gameID', async (req: Request, res: Response
   const { teamName, gameID } = req.params;
   try {
     const gameDetails = await getGameDetails(teamName, gameID);
+    //save game details to database
+    await Game.create(gameDetails);
+    
     res.json(gameDetails);
   } catch (error: any) {
     res.status(500).json({
