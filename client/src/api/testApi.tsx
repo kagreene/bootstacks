@@ -4,6 +4,9 @@
 //https://nfl-api-data.p.rapidapi.com/nfl-single-events?id=401547401
 //Kristen key -> c51f2009e8mshc967a039cff7c74p12c78fjsn6c84dc76eb10
 //al -> a43cb93394mshb433c340a199dacp11e7b3jsn9c4a54948efa
+
+
+
 export const getEventsData = async() => {  
     const url = 'https://nfl-api-data.p.rapidapi.com/nfl-events?year=2025';
     const options = {
