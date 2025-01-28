@@ -1,5 +1,6 @@
 import dotenv from 'dotenv';
 import axios from 'axios';
+import { Game } from '../models/Game.js'
 dotenv.config();
 
 const NFL_API_KEY = process.env.NFL_API_KEY;
@@ -66,10 +67,10 @@ export const getTeamSchedule = async (teamName: string) => {
             }
         );
         // map response to get schedule of games
-        const data = await response.json();
+        const data = await response.data();
         const events = data.events;
 
-        const mappedSchedule = await events.map((event: any) =>{
+        const mappedSchedule = await events.map(async (event: any) =>{
             //want to show user upcoming games. need to return gameID, date, venue, city
             // need to show user the team they are playing against, date, and venue
             //Access first competition in competitions array 
@@ -81,18 +82,22 @@ export const getTeamSchedule = async (teamName: string) => {
 
             //Determine opposing team 
             const opposingTeam = homeTeam.id === teamID ? awayTeam : homeTeam;
-            return {
+            
+            //save game details to database
+            const gameDetails = {
                 gameID: event.id,
                 date: event.date,
                 venue: competition.venue.fullName,
                 city: competition.venue.address.city,
-                opposingTeam: opposingTeam.displayName,
-                zipCode: competition.venue.address.zipCode,
+                opposingTeam: opposingTeam.team.displayName,
+                zipCode: competition.venue.address.zip,
             };
+            await Game.create(gameDetails);
+            return gameDetails;
         });
 
          //return full schedule
-         return mappedSchedule;
+         return Promise.all(mappedSchedule);
     } catch (error) {
         console.error('Error fetching team schedule', error);
         throw new Error('Failed to fetch team schedule.');
