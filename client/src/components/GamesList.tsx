@@ -1,28 +1,30 @@
-import React from 'react'
+//import React from 'react'
+import { useEffect, useState } from 'react'
 import { TeamCard } from './TeamCard'
-
-/*
-
-data that we need -->
-game
-location
-date
-time 
-image
-
-*/
-
-const  games = [
-    {
-
-    },
-] 
+import { getEventsData } from '../api/testApi'
 
 export const GamesList = () => {
 
+  const [events, setEvents] = useState([])
+
+  useEffect(() => {
+      //getEventsData().then( data => setEvents(data) )
+    }, [])
+
   return (
     <div>
-        <TeamCard game="Los Lakers at El Heats" location="miami" time="7:00pm"/>
+        {
+          events.map( ( objElement: any ) => {
+            return(
+             <TeamCard
+              key={ objElement.id }
+              game={ objElement.name }
+              location={'London'}
+              time={ objElement.date }
+              /> 
+            )
+          })
+        }
     </div>
   )
 }

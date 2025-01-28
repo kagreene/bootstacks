@@ -1,4 +1,5 @@
-import React from 'react'
+import  { useEffect, useState } from 'react'
+import { getEventsData } from '../api/testApi'
 
 interface TeamCardProps {
   game:string,
@@ -6,7 +7,10 @@ interface TeamCardProps {
   time:string
 }
 
+
 export const TeamCard = ( { game, location, time } : TeamCardProps ) => {
+
+
   return (
     <div className="card" style={{width: "25%"}}>
       <div className='row'>
