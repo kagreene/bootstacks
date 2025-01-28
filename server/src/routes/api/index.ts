@@ -7,6 +7,6 @@ import { weatherRouter } from './weatherApi.js';
 const router = Router();
 
 router.use('/nfl', nflRouter);
-router.use('/works', weatherRouter);
+router.use('/weather', weatherRouter);
 
 export default router;
