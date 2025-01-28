@@ -9,6 +9,7 @@ const router = express.Router();
 router.get('/team-schedule/:teamName', async (req: Request, res: Response) => {
   const teamName = req.params.teamName;
   try {
+    // Fetch and save schedule to database, return mapped schedule
     const schedule = await getTeamSchedule(teamName);
     res.json(schedule);
     
@@ -23,10 +24,8 @@ router.get('/team-schedule/:teamName', async (req: Request, res: Response) => {
 router.get('/game-details/:teamName/:gameID', async (req: Request, res: Response) => {
   const { teamName, gameID } = req.params;
   try {
+    // Get game details from database
     const gameDetails = await getGameDetails(teamName, gameID);
-    //save game details to database
-    await Game.create(gameDetails);
-    
     res.json(gameDetails);
   } catch (error: any) {
     res.status(500).json({

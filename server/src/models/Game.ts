@@ -2,27 +2,32 @@
 
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 
-
 interface GameAttributes {
-  id: number;
-  gameID: string;
-  date: string;
-  venue: string;
-  city: string;
-  opposingTeam: string;
-  zipCode: string;
+  id: string;
+  date: Date;
+  name: string;
+  shortName: string;
+  seasonYear: number;
+  seasonType: string;
+  weekNumber: number;
+  weekText: string;
+  homeTeamId: string;
+  awayTeamId: string;
 }
 
-interface GameCreationAttributes extends Optional<GameAttributes, 'id'> {}
+interface GameCreationAttributes extends Optional<GameAttributes, never> {}
 
 export class Game extends Model<GameAttributes, GameCreationAttributes> implements GameAttributes {
-  public id!: number;
-  public gameID!: string;
-  public date!: string;
-  public venue!: string;
-  public city!: string;
-  public opposingTeam!: string;
-  public zipCode!: string;
+  public id!: string;
+  public date!: Date;
+  public name!: string;
+  public shortName!: string;
+  public seasonYear!: number;
+  public seasonType!: string;
+  public weekNumber!: number;
+  public weekText!: string;
+  public homeTeamId!: string;
+  public awayTeamId!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
@@ -32,38 +37,65 @@ export function GameFactory(sequelize: Sequelize): typeof Game {
   Game.init(
     {
       id: {
-        type: DataTypes.INTEGER.UNSIGNED,
-        autoIncrement: true,
+        type: DataTypes.STRING,
         primaryKey: true,
       },
-      gameID: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       date: {
+        type: DataTypes.DATE,
+        allowNull: false,
+      },
+      name: {
         type: DataTypes.STRING,
         allowNull: false,
       },
-      venue: {
+      shortName: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'short_name',
       },
-      city: {
-        type: DataTypes.STRING,
+      seasonYear: {
+        type: DataTypes.INTEGER,
         allowNull: false,
+        field: 'season_year',
       },
-      opposingTeam: {
+      seasonType: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'season_type',
       },
-      zipCode: {
+      weekNumber: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        field: 'week_number',
+      },
+      weekText: {
         type: DataTypes.STRING,
         allowNull: false,
+        field: 'week_text',
+      },
+      homeTeamId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'home_team_id',
+        references: {
+          model: 'teams',
+          key: 'id',
+        },
+      },
+      awayTeamId: {
+        type: DataTypes.STRING,
+        allowNull: false,
+        field: 'away_team_id',
+        references: {
+          model: 'teams',
+          key: 'id',
+        },
       },
     },
     {
       sequelize,
       tableName: 'games',
+      underscored: true,
     }
   );
 

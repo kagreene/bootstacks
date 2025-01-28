@@ -6,8 +6,15 @@ dotenv.config();
 const NFL_API_KEY = process.env.NFL_API_KEY;
 const NFL_BASE_URL = 'nfl-api-data.p.rapidapi.com';
 
+// Interface for team mapping response
+interface TeamMapping {
+  id: string;
+  name: string;
+  abbreviation: string;
+}
+
 //get list of all teams with names and ids 
-export const fetchTeamMapping = async () => {
+export const fetchTeamMapping = async (): Promise<TeamMapping[]> => {
     try {
       const response = await axios.get(`${NFL_BASE_URL}/nfl-team-listing/v1/data`, {
         headers: {
@@ -27,15 +34,15 @@ export const fetchTeamMapping = async () => {
       console.error('Error fetching team mapping:', error);
       throw new Error('Failed to fetch team mapping.');
     }
-  };
+};
   
-  // Get team ID by team name
-  export const getTeamID = async (teamName: string): Promise<string> => {
+// Get team ID by team name
+export const getTeamID = async (teamName: string): Promise<string> => {
     try {
       const teams = await fetchTeamMapping();
   
       const team = teams.find(
-        (t: { name: string }) => t.name.toLowerCase() === teamName.toLowerCase()
+        (t) => t.name.toLowerCase() === teamName.toLowerCase()
       );
   
       if (!team) {
@@ -46,8 +53,8 @@ export const fetchTeamMapping = async () => {
     } catch (error) {
         console.error('Error fetching team ID:', error);
         throw new Error('Failed to fetch team ID.');
-      }
-    };
+    }
+};
 
 //fetch team schedule by team name
 export const getTeamSchedule = async (teamName: string) => {
@@ -56,6 +63,7 @@ export const getTeamSchedule = async (teamName: string) => {
     if (!teamID) {
         throw new Error(`Team ${teamName} not found`);
     }
+
     try {
         const response = await axios.get(
             `${NFL_BASE_URL}/nfl-team-schedule?id=${teamID}`,
@@ -66,13 +74,12 @@ export const getTeamSchedule = async (teamName: string) => {
                 },
             }
         );
+
         // map response to get schedule of games
         const data = await response.data();
         const events = data.events;
 
-        const mappedSchedule = await events.map(async (event: any) =>{
-            //want to show user upcoming games. need to return gameID, date, venue, city
-            // need to show user the team they are playing against, date, and venue
+        const mappedSchedule = await events.map(async (event: any) => {
             //Access first competition in competitions array 
             const competition = event.competitions[0];
             
@@ -80,45 +87,44 @@ export const getTeamSchedule = async (teamName: string) => {
             const homeTeam = competition.competitors.find((team: any) => team.homeAway === 'home');
             const awayTeam = competition.competitors.find((team: any) => team.homeAway === 'away');
 
-            //Determine opposing team 
-            const opposingTeam = homeTeam.id === teamID ? awayTeam : homeTeam;
-            
-            //save game details to database
+            // Create game with updated schema matching our database structure
             const gameDetails = {
-                gameID: event.id,
-                date: event.date,
-                venue: competition.venue.fullName,
-                city: competition.venue.address.city,
-                opposingTeam: opposingTeam.team.displayName,
-                zipCode: competition.venue.address.zip,
+                id: event.id,
+                date: new Date(event.date),
+                name: event.name,
+                shortName: event.shortName || `${awayTeam.team.abbreviation} @ ${homeTeam.team.abbreviation}`,
+                seasonYear: event.season.year,
+                seasonType: event.season.type,
+                weekNumber: event.week.number,
+                weekText: event.week.text,
+                homeTeamId: homeTeam.team.id,
+                awayTeamId: awayTeam.team.id
             };
-            await Game.create(gameDetails);
+
+            // Create or update game in database using upsert to avoid duplicates
+            await Game.upsert(gameDetails);
             return gameDetails;
         });
 
-         //return full schedule
-         return Promise.all(mappedSchedule);
+        //return full schedule
+        return Promise.all(mappedSchedule);
     } catch (error) {
         console.error('Error fetching team schedule', error);
         throw new Error('Failed to fetch team schedule.');
     }
 };
-//get game details by teamName
-export const getGameDetails = async (teamName: string, gameID: string) => {
+
+//get game details by teamName and gameId
+export const getGameDetails = async (teamName: string, gameId: string) => {
     try {
-        const schedule = await getTeamSchedule(teamName);
-        const game = schedule.find((game: any) => game.gameID === gameID);
+        // Find game by primary key in database
+        const game = await Game.findByPk(gameId);
+        
         if (!game) {
-            throw new Error(`Game ${gameID} not found.`);
+            throw new Error(`Game ${gameId} not found.`);
         }
-        return {
-            gameID: game.gameID,
-            date: game.date,
-            venue:game.venue,
-            city: game.city,
-            opposingTeam: game.opposingTeam,
-            zipCode: game.zipCode,
-        }
+
+        return game;
     } catch (error) {
         console.error('Error fetching game details', error);
         throw new Error('Failed to fetch game details.');
