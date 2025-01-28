@@ -1,5 +1,63 @@
 -- DROP DATABASE
-DROP DATABASE IF EXISTS volunteer_db;
+DROP DATABASE IF EXISTS nfl_weather_db;
 
 -- CREATE DATABASE
-CREATE DATABASE volunteer_db;
+CREATE DATABASE nfl_weather_db;
+
+USE nfl_weather_db;
+
+-- Create Teams table
+CREATE TABLE teams (
+  id VARCHAR(10) PRIMARY KEY,
+  location VARCHAR(100) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  display_name VARCHAR(100) NOT NULL,
+  abbreviation VARCHAR(5) NOT NULL,
+  venue_name VARCHAR(100) NOT NULL,
+  venue_city VARCHAR(100) NOT NULL,
+  venue_state CHAR(2) NOT NULL,
+  venue_zip_code VARCHAR(10) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
+
+-- Create Games table
+CREATE TABLE games (
+  id VARCHAR(20) PRIMARY KEY,
+  date DATETIME NOT NULL,
+  name VARCHAR(255) NOT NULL,
+  short_name VARCHAR(100) NOT NULL,
+  season_year INT NOT NULL,
+  season_type VARCHAR(50) NOT NULL,
+  week_number INT NOT NULL,
+  week_text VARCHAR(50) NOT NULL,
+  home_team_id VARCHAR(10) NOT NULL,
+  away_team_id VARCHAR(10) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (home_team_id) REFERENCES teams(id),
+  FOREIGN KEY (away_team_id) REFERENCES teams(id)
+);
+
+-- Create Weather table
+CREATE TABLE weather (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  game_id VARCHAR(20) NOT NULL,
+  weather VARCHAR(100) NOT NULL,
+  temp INT NOT NULL,
+  precipitation INT NOT NULL,
+  wind INT NOT NULL,
+  last_updated DATETIME NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  FOREIGN KEY (game_id) REFERENCES games(id)
+);
+
+-- Create Users table
+CREATE TABLE users (
+  id INT AUTO_INCREMENT PRIMARY KEY,
+  username VARCHAR(255) NOT NULL UNIQUE,
+  password VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+);
