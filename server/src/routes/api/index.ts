@@ -1,12 +1,12 @@
 // This file is used to define the API routes for the server
 
 import { Router } from 'express';
-import { volunteerRouter } from './services/nflApi.js';
-import { workRouter } from './services/weatherApi.js';
+import { nflRouter } from './nflApi.js';
+import { weatherRouter } from './weatherApi.js';
 
 const router = Router();
 
-router.use('/volunteers', volunteerRouter);
-router.use('/works', workRouter);
+router.use('/nfl', nflRouter);
+router.use('/works', weatherRouter);
 
 export default router;
