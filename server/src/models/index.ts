@@ -1,8 +1,8 @@
 // This file is used to define the models for the server
 
 import { Sequelize } from 'sequelize';
-import { UserFactory } from './User';
-import { GameFactory } from './Game';
+import { UserFactory } from './User.js';
+import { GameFactory } from './Game.js';
 
 let User: ReturnType<typeof UserFactory>;
 let Game: ReturnType<typeof GameFactory>;
