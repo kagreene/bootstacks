@@ -1,7 +1,7 @@
 // This file is used to display an error page
 
-import { useRouteError } from "react-router-dom";
-import { Link } from "react-router-dom";
+import { useRouteError } from 'react-router';
+import { Link } from 'react-router';
 
 interface ErrorResponse {
 	status?: number;
