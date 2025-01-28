@@ -1,5 +1,5 @@
 
-import { GamesList } from "../components/GamesList"
+
 import footballImg from '../assets/img/img-intro.jpeg'
 
 export const Home = () => { 
@@ -7,6 +7,7 @@ export const Home = () => {
   return (
 
     <section className="container-fluid p-0">
+      
       <div className="row">
         <div id="carouselExampleSlidesOnly" className="carousel slide" data-bs-ride="carousel">
           <div className="carousel-inner">

@@ -8,23 +8,26 @@ export const GamesList = () => {
   const [events, setEvents] = useState([])
 
   useEffect(() => {
-      //getEventsData().then( data => setEvents(data) )
+      getEventsData().then( data => setEvents(data) )
     }, [])
 
   return (
-    <div>
+    <div className='container-fluid'>
+      <div className='row'>
         {
           events.map( ( objElement: any ) => {
             return(
              <TeamCard
               key={ objElement.id }
               game={ objElement.name }
-              location={'London'}
+              city={ objElement.city }
+              state={ objElement.state }
               time={ objElement.date }
               /> 
             )
           })
         }
+      </div>  
     </div>
   )
 }
