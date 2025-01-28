@@ -1,11 +1,14 @@
 import { Route, Routes } from 'react-router'
 import { EventsPage, Home, Login, Register, Weather } from '../pages'
 import { Navbar } from '../components/Navbar'
+import { Footer } from '../components/Footer'
+import './styles.css'
 
 export const AppRouter = () => {
   return (
-    <div>
+    <div className = "App">
       <Navbar />
+      <div className='Routes'>
       <Routes> 
           <Route path='/' element={ <Home /> } />  
           <Route path='weather' element={ <Weather /> } />
@@ -13,6 +16,8 @@ export const AppRouter = () => {
           <Route path='register' element={ <Register /> } />
           <Route path='events' element={ <EventsPage /> } />      
       </Routes>
+      </div>
+      <Footer />
     </div>
 
   )
