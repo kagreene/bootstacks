@@ -1,22 +1,15 @@
-import { seedTeams } from './team-seeds.js';
-import { seedGames } from './game-seeds.js';
-import { seedWeather } from './weather-seeds.js';
 import sequelize from '../config/connection.js';
+import { seedUsers } from './seedUsers.js';
+
 
 const seedAll = async (): Promise<void> => {
   try {
     await sequelize.sync({ force: true });
     console.log('\n----- DATABASE SYNCED -----\n');
-    
-    await seedTeams();
-    console.log('\n----- TEAMS SEEDED -----\n');
-    
-    await seedGames();
-    console.log('\n----- GAMES SEEDED -----\n');
-    
-    await seedWeather();
-    console.log('\n----- WEATHER SEEDED -----\n');
-    
+
+    await seedUsers();
+    console.log('\n----- USERS SEEDED -----\n');
+
     process.exit(0);
   } catch (error) {
     console.error('Error seeding database:', error);
@@ -25,3 +18,4 @@ const seedAll = async (): Promise<void> => {
 };
 
 seedAll();
+
