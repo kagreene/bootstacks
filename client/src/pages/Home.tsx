@@ -32,7 +32,8 @@ export const Home = () => {
             </div>
           </div>
 
-          <GoalsSection/>
+          <GoalsSection />
+
 
         </div>
       

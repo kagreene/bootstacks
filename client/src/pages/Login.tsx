@@ -7,7 +7,7 @@ export const Login = () => {
 
     const [ inputs, setInputs ] = useState <UserLogin> ({
         email:"",
-        password:"" 
+        password:""
     });
 
     const onHandleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {

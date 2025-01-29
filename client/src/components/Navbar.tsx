@@ -1,8 +1,9 @@
-import { Link } from 'react-router'
-import './styles.css'
+import { Link } from "react-router";
+import "./styles.css";
+import logo from "../assets/img/images-weatherblitz/weatherblitz-logo.png";
 
-export const Navbar = () => {
-    
+export const Navbar = () => {    
+  
     return (
     <nav>            
       <div className='logo'>
@@ -27,3 +28,4 @@ export const Navbar = () => {
     </nav>
   )
 }
+
