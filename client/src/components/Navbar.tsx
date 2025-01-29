@@ -1,30 +1,31 @@
-import { Link } from "react-router-dom";
+import { Link } from "react-router";
 import "./styles.css";
 import logo from "../assets/img/images-weatherblitz/weatherblitz-logo.png";
 
-export const Navbar = () => {
-	return (
-		<nav className="navbar navbar-expand-lg">
-			<div className="logo">
-				<Link to={"/"} className="navbar-brand">
-					<img src={logo} alt="WeatherBlitz Logo" style={{ height: "40px" }} />
-				</Link>
-			</div>
-			<ul className="nav ms-auto">
-				<li className="nav-item">
-					<Link to="/" className="nav-link text-white">
-						Home
-					</Link>
-				</li>
-				<li className="nav-item d-flex">
-					<Link to="/login" className="nav-link">
-						<button className="btn btn-outline-light me-2">Login</button>
-					</Link>
-					<Link to="/register" className="nav-link">
-						<button className="btn btn-light">Sign Up</button>
-					</Link>
-				</li>
-			</ul>
-		</nav>
-	);
-};
+export const Navbar = () => {    
+  
+    return (
+    <nav>            
+      <div className='logo'>
+        <Link to={'/'} style={{textDecoration:'none', color:'white'}}>
+        <h3>Weather<span style={{ color:'GrayText' }}>Blitz</span></h3>
+        </Link>
+      </div>    
+      <ul className='nav'>
+        <li className='nav-item d-flex flex-row'>
+          <button style={{ borderRadius: "10%", marginLeft: "2%" }}>
+            <Link to='/login' className='nav-link'>
+              Login
+            </Link>
+          </button>
+          <button style={{ borderRadius: "10%", marginLeft: "2%" }} >
+            <Link to='/register' className='nav-link'>
+              Signup
+            </Link>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  )
+}
+
