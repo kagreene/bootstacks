@@ -1,5 +1,5 @@
 import  { useEffect, useState } from 'react'
-import { getEventsData } from '../api/testApi'
+import { getEventsData } from '../api/nflApi'
 
 interface TeamCardProps {
   game:string,

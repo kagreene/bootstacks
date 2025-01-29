@@ -4,7 +4,7 @@ import express from 'express';
 import sequelize from './config/connection.js';
 import routes from './routes/index.js';
 import dotenv from 'dotenv';
-import { initializeModels } from './models/index.js';
+//import { initializeModels } from './models/index.js';
 
 dotenv.config();
 
@@ -19,7 +19,7 @@ app.use(express.json());
 app.use(routes);
 
 //Initialize models
-initializeModels(sequelize);
+//initializeModels(sequelize);
 
 sequelize.sync({force: forceDatabaseRefresh}).then(() => {
   app.listen(PORT, () => {

@@ -1,29 +1,6 @@
-// This file is used to define the models for the server
-
-import { Sequelize } from 'sequelize';
+import sequelize from '../config/connection.js';
 import { UserFactory } from './User.js';
-import { GameFactory } from './Game.js';
 
-let User: ReturnType<typeof UserFactory>;
-let Game: ReturnType<typeof GameFactory>;
+const User = UserFactory(sequelize);
 
-export const initializeModels = (sequelize: Sequelize) => {
-  const User = UserFactory(sequelize);
-  const Game = GameFactory(sequelize);
-
-  // Set up associations
-  User.hasMany(Game, {
-    foreignKey: 'user_id',
-  });
-
-  Game.belongsTo(User, {
-    foreignKey: 'user_id',
-  });
-
-  return {
-    User,
-    Game,
-  };
-};
-
-export {User, Game } ; 
+export { User };

@@ -1,3 +1,4 @@
+/*
 import express from 'express';
 import type { Request, Response } from 'express';
 import { getTeamSchedule, getGameDetails } from '../../service/nflService.js'
@@ -36,3 +37,4 @@ router.get('/game-details/:teamName/:gameID', async (req: Request, res: Response
 });
 
 export { router as nflRouter };
+*/
