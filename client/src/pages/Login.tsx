@@ -1,11 +1,13 @@
 import { useState } from "react";
 import { Link } from "react-router";
+import { login } from "../api/authAPI";
+import { UserLogin } from "../interfaces/UserLogin";
 
 export const Login = () => {
 
-    const [ inputs, setInputs ] = useState({
+    const [ inputs, setInputs ] = useState <UserLogin> ({
         email:"",
-        password:""
+        password:"" 
     });
 
     const onHandleChange = ( event: React.ChangeEvent<HTMLInputElement> ) => {
@@ -16,6 +18,7 @@ export const Login = () => {
 
     const handleSubmit = ( event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
+      login( inputs )
       console.log("handle submit " + inputs.email + " " + inputs.password)
     }
 
@@ -51,7 +54,7 @@ export const Login = () => {
                           name='password'
                           className="form-control" 
                           placeholder='Your Email...' 
-                          value={ inputs.password }
+                          value = { inputs.password }
                           onChange={ onHandleChange }
                       />
                   </div>

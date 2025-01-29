@@ -1,6 +1,7 @@
 
 
 import footballImg from '../assets/img/img-intro.jpeg'
+import { GoalsSection } from '../components/GoalsSection'
 
 export const Home = () => { 
     
@@ -14,7 +15,7 @@ export const Home = () => {
             <div className="carousel-item active">
               <img src={ footballImg } className="d-block w-100" alt="..." style={{ height: '80vh' }} />
               <div className="carousel-caption d-none d-md-block">
-                <h1>Welcome to BootStacks</h1>
+                <h1>Discover NFL Games with Real-time Weather Updates</h1>
                 <p>The best NFL statistics apps developers in Chicago</p>
               </div>
             </div>
@@ -27,8 +28,12 @@ export const Home = () => {
           <h2>The best NFL statistics and events app</h2>
             <div>
               <p>  We are here to help you to understand better the sport that you love so much </p>
+              <p> Join our innovative platform to effortlessly search NFL games by schedule or team. Get instant weather forecasts for a complete game-day experience.</p>
             </div>
           </div>
+
+          <GoalsSection/>
+
         </div>
       
 
