@@ -10,7 +10,8 @@ interface WeatherCardProps {
 export const WeatherCard: React.FC<WeatherCardProps> = ({weather, temp, precipitation, wind}) => {
   
     return (
-    <div className="WeatherCard">       
+    <div className="WeatherCard">
+      <h1>Weather</h1> 
     <div>{weather}</div>   
     <div>{temp}°F</div>
     <div>{precipitation}%</div>
