@@ -1,15 +1,16 @@
 import type { UserLogin } from '../interfaces/UserLogin';
-
+//import Auth from '../utils/auth';
 const login = async (userInfo: UserLogin) => {
   try {
     const response = await fetch('/auth/login', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        //Authorization: `Bearer ${Auth.getToken()}`,
       },
       body: JSON.stringify(userInfo),
     });
-
+    console.log(response);
     const data = await response.json();
 
     if (!response.ok) {
