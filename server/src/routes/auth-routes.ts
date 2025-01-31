@@ -9,8 +9,9 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 export const login = async (req: Request, res: Response) => {
-  const { username, password } = req.body;
 
+  const { username, password } = req.body;
+  console.log(username + " " + password);
   const user = await User.findOne({
     where: { username },
   });

@@ -23,20 +23,7 @@ export const Home = () => {
         </div>
       </div>
 
-        <div className="row">
-          <div className="col">
-          <h2>The best NFL statistics and events app</h2>
-            <div>
-              <p>  We are here to help you to understand better the sport that you love so much </p>
-              <p> Join our innovative platform to effortlessly search NFL games by schedule or team. Get instant weather forecasts for a complete game-day experience.</p>
-            </div>
-          </div>
-
-          <GoalsSection />
-
-
-        </div>
-      
+      <GoalsSection />
 
     </section>
   )

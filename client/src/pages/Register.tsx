@@ -28,16 +28,13 @@ export const Register = () => {
 						src={quarterback}
 						alt="Quarterback"
 						className="img-fluid rounded"
-						style={{ maxHeight: "300px", width: "100%", objectFit: "cover" }}
+						style={{ height:"75%", width: "100%", objectFit: "cover" }}
 					/>
 				</div>
 				<div className="col-md-5">
 					<div>
-						<h1 style={{ textAlign: "center" }} className="intro-h1">
-							Register
-						</h1>
+						<h1 style={ { textAlign: "center" } }>Register</h1>
 					</div>
-
 					<form onSubmit={handleSubmit}>
 						<div>
 							<label className="contact-label mt-5"> Fullname </label>

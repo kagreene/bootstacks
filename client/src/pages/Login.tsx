@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Link } from "react-router";
 import { login } from "../api/authAPI";
 import { UserLogin } from "../interfaces/UserLogin";
+import Auth from '../utils/auth';
 
 export const Login = () => {
 
     const [ inputs, setInputs ] = useState <UserLogin> ({
-        email:"",
+        username:"",
         password:""
     });
 
@@ -16,10 +17,15 @@ export const Login = () => {
        setInputs( (prevFormData ) => ({ ...prevFormData, [name]:value }))
     }
 
-    const handleSubmit = ( event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async ( event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault();
-      login( inputs )
-      console.log("handle submit " + inputs.email + " " + inputs.password)
+      try {
+        const data = await login(inputs);
+        console.log(data);
+        Auth.login(data.token);
+      } catch (err) {
+        console.log(err);
+      }
     }
 
 
@@ -29,20 +35,19 @@ export const Login = () => {
           
         <div className='row p-0 justify-content-center'>
           
-          <div className='col-5'>
+          <div className='col-sm-9 col-md-6 col-lg-9 col-xl-6 col-xxl-6'>
               <div>
                   <h1 style={{ textAlign:"center" }} className='intro-h1'>Login</h1>
               </div>
 
               <form onSubmit={ handleSubmit }>
                   <div>
-                      <label className='contact-label mt-5'> Email</label>
+                      <label className='contact-label mt-5'> Username </label>
                       <input 
-                          type={"email"} 
-                          name='email'
+                          type='text' 
+                          name='username'
                           className="form-control" 
-                          placeholder='email@test.com'
-                          value={ inputs.email }
+                          value={ inputs.username }
                           onChange={ onHandleChange }
                       />
                   </div>
@@ -50,10 +55,9 @@ export const Login = () => {
                   <div>
                       <label className='contact-label mt-4'> Password </label>
                       <input 
-                          type={"password"} 
+                          type='password' 
                           name='password'
                           className="form-control" 
-                          placeholder='Your Email...' 
                           value = { inputs.password }
                           onChange={ onHandleChange }
                       />
@@ -64,7 +68,7 @@ export const Login = () => {
                   </div>
 
                   <div className='mt-4'> 
-                      <button type='submit' className='btn btn-dark w-25'>Submit</button>
+                      <button type='submit' className='btn btn-dark w-lg-25'>Submit</button>
                   </div>
               </form>
           </div> 
