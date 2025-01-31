@@ -3,6 +3,8 @@
 // jwtDecode: A function used to decode a JSON Web Token (JWT) and extract its payload.
 import { type JwtPayload, jwtDecode } from 'jwt-decode';
 import type { UserData } from '../interfaces/UserData';
+//import { useNavigate } from 'react-router-dom';
+import { NavigateFunction } from 'react-router-dom';
 
 class AuthService {
   getProfile() {
@@ -37,9 +39,9 @@ class AuthService {
     return loggedUser;
   }
 
-  login(idToken: string) {
+  login(idToken: string, navigate: NavigateFunction) {
     localStorage.setItem('id_token', idToken);
-    window.location.assign('/events');
+    navigate('/events');
   }
 
   logout() {

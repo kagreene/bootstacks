@@ -3,8 +3,10 @@ import quarterback from "../assets/img/images-weatherblitz/Quarterback.jpeg";
 import {signup} from '../api/registerAPI';
 import {UserSignup} from '../interfaces/UserSignup';
 import Auth from '../utils/auth';
+import { useNavigate } from "react-router";
 
 export const Register = () => {
+	const navigate = useNavigate();
 	const [inputs, setInputs] = useState <UserSignup>({
 		username: "",
 		phone: "",
@@ -23,7 +25,7 @@ export const Register = () => {
 		try {
 			const data = await signup(inputs);
 			console.log(data);
-			Auth.login(data.token);
+			Auth.login(data.token, navigate);
 		  } catch (err) {
 			console.log(err);
 		  }
