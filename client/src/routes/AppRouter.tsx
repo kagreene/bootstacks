@@ -14,7 +14,7 @@ export const AppRouter = () => {
           <Route path='weather' element={ <Weather /> } />
           <Route path='login' element={ <Login /> } /> 
           <Route path='register' element={ <Register /> } />
-          <Route path='events' element={ <EventsPage /> } />      
+          <Route path='/events' element={ <EventsPage /> } />      
       </Routes>
       </div>
       <Footer />

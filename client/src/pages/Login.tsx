@@ -3,8 +3,10 @@ import { Link } from "react-router";
 import { login } from "../api/authAPI";
 import { UserLogin } from "../interfaces/UserLogin";
 import Auth from '../utils/auth';
+import { useNavigate } from "react-router";
 
 export const Login = () => {
+	const navigate = useNavigate();
 
     const [ inputs, setInputs ] = useState <UserLogin> ({
         username:"",
@@ -22,7 +24,7 @@ export const Login = () => {
       try {
         const data = await login(inputs);
         console.log(data);
-        Auth.login(data.token);
+        Auth.login(data.token, navigate);
       } catch (err) {
         console.log(err);
       }

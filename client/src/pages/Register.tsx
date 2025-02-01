@@ -1,9 +1,14 @@
 import React, { useState } from "react";
 import quarterback from "../assets/img/images-weatherblitz/Quarterback.jpeg";
+import {signup} from '../api/registerAPI';
+import {UserSignup} from '../interfaces/UserSignup';
+import Auth from '../utils/auth';
+import { useNavigate } from "react-router";
 
 export const Register = () => {
-	const [inputs, setInputs] = useState({
-		fullName: "",
+	const navigate = useNavigate();
+	const [inputs, setInputs] = useState <UserSignup>({
+		username: "",
 		phone: "",
 		email: "",
 		password: "",
@@ -15,8 +20,15 @@ export const Register = () => {
 		setInputs((prevFormData) => ({ ...prevFormData, [name]: value }));
 	};
 
-	const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+	const handleSubmit = async(event: React.FormEvent<HTMLFormElement>) => {
 		event.preventDefault();
+		try {
+			const data = await signup(inputs);
+			console.log(data);
+			Auth.login(data.token, navigate);
+		  } catch (err) {
+			console.log(err);
+		  }
 		console.log("handle submit " + inputs.email + " " + inputs.password);
 	};
 
@@ -37,13 +49,13 @@ export const Register = () => {
 					</div>
 					<form onSubmit={handleSubmit}>
 						<div>
-							<label className="contact-label mt-5"> Fullname </label>
+							<label className="contact-label mt-5"> Username </label>
 							<input
 								type={"text"}
-								name="fullName"
+								name="username"
 								className="form-control"
 								placeholder="Exm: Robert De Niro"
-								value={inputs.fullName}
+								value={inputs.username}
 								onChange={onHandleChange}
 							/>
 						</div>
