@@ -8,6 +8,6 @@ const router = Router();
 
 router.use('/api', authenticateToken, apiRoutes);
 // Use authenticateToken and authRoutes to login a user  
-router.use('/auth', authRoutes);
+router.use('/auth', authRoutes)
 
 export default router;
