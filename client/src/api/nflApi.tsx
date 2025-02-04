@@ -6,7 +6,7 @@ export const getEventsData = async() => {
     const options = {
         method: 'GET',
         headers: {
-            'x-rapidapi-key': 'c749b4422amsh78e9a345cf96886p17b3f6jsnd9271783581a',
+            'x-rapidapi-key': import.meta.env.VITE_REACT_APP_RAPIDAPI_KEY,
             'x-rapidapi-host': 'nfl-api-data.p.rapidapi.com'
         }
     }
