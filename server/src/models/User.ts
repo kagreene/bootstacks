@@ -14,7 +14,7 @@ export class User extends Model<UserAttributes, UserCreationAttributes> implemen
   public id!: number;
   public username!: string;
   public password!: string;
-  public email !: string;
+  public email!: string;
 
   public readonly createdAt!: Date;
   public readonly updatedAt!: Date;
