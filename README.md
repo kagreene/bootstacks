@@ -51,7 +51,8 @@ Register
 ![Image of Registration page](./assets/Register.jpg)
 
 Events page
-![Image of Events page]()
+![Image of Events page](./assets/EventsPage.jpg)
+![Image of Event with weather](./assets/WeatherEvent.jpg)
 
 ## Deployed Application
-You can view the deployed application [here]()
+You can view the deployed application [here](https://weatherblitz.onrender.com/register)
